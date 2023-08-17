@@ -15,7 +15,7 @@ import {Facture} from "../utils/models/Facture";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ApiService {
 
   constructor(
     private readonly http: HttpClient
@@ -34,8 +34,8 @@ export class UserService {
     ALL_FACTURES_URL
   );
 
-  public $facturesByClient = this.http.get<ResponseHelper<Facture[]>>(
-    ALL_FACTURES_BY_CLIENT_URL
+  public facturesByClient$ = (clientId: string) => this.http.get<ResponseHelper<Facture[]>>(
+    ALL_FACTURES_BY_CLIENT_URL + clientId
   );
 
   public $facture = () => this.http.get<ResponseHelper<Facture>>(

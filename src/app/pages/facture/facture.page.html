@@ -1,0 +1,14 @@
+<div class="hero h-[125] bg-base-200">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Liste des factures de client: </h1>
+    </div>
+  </div>
+</div>
+
+
+<ng-container *ngIf="factureState$ | async as factureState">
+  <div class="flex flex-wrap items-center justify-center h-screen space-x-4">
+    <app-facture-card *ngFor="let facture of factureState.appData?.data?.['factures']" [facture]="facture" />
+  </div>
+</ng-container>

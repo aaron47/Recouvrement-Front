@@ -2,10 +2,10 @@ import { Component, Input } from "@angular/core";
 import { Facture } from "../../utils/models/Facture";
 
 @Component({
-  selector: "app-facture-details",
-  templateUrl: "./facture-details.page.html",
-  styleUrls: ["./facture-details.page.css"],
+  selector: "app-facture-card",
+  templateUrl: "./facture-card.component.html",
+  styleUrls: ["./facture-card.component.css"],
 })
-export class FactureDetailsPage {
+export class FactureCardComponent {
   @Input({ required: true }) facture!: Facture;
 }

@@ -1,12 +1,21 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FactureDetailsPage } from "./pages/facture-details/facture-details.page";
+import { FacturePage } from "./pages/facture/facture.page";
+import { HomePage } from "./pages/home/home.page";
 
 const routes: Routes = [
   {
-    path: "facture-details",
-    component: FactureDetailsPage,
+    path: "home",
+    component: HomePage,
   },
+  {
+    path: "factures/:clientId",
+    component: FacturePage,
+  },
+  {
+    path: "**",
+    redirectTo: "home",
+  }
 ];
 
 @NgModule({
