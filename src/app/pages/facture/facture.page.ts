@@ -39,7 +39,9 @@ export class FacturePage implements OnInit, OnDestroy {
       .subscribe(
         params => {
           let id: string = params["clientId"];
-          this.factureService.fetchFacturesByClient(id).subscribe();
+          this.factureService.fetchFacturesByClient(id)
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe();
         },
       );
   }

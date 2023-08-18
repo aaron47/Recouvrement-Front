@@ -76,7 +76,7 @@ td {
 
 .total {
   font-weight: 800;
-  font-size: 20px !important;
+  font-size: 1.2rem !important;
   color: black;
 }
 
@@ -151,13 +151,13 @@ input[type=number] {
   width: 100%;
 }
 
-#sum input[type=text] {
-  width: 100%;
-  font-size: 33px !important;
-  color: black;
-  text-align: right !important;
+/*#sum input[type=text] {*/
+/*  width: 100%;*/
+/*  font-size: 33px !important;*/
+/*  color: black;*/
+/*  text-align: right !important;*/
 
-}
+/*}*/
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
