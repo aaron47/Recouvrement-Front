@@ -8,7 +8,8 @@
     <p class="invoice-number">#{{ facture.id }}</p>
   </div>
   <div class="invoice-body">
-    <table>
+    <p>{{ facture.description}}</p>
+    <table class="my-10">
       <thead>
       <th style="padding-left:12px;">PRODUCT</th>
       <th>UNIT</th>
@@ -31,7 +32,23 @@
       </tr>
       </tbody>
     </table>
-    <div id="sum"><input type="text" [placeholder]="facture.montant.toFixed(4)" name="total" class="total" id="total" disabled>
+    <div id="sum">
+      <input
+        type="text"
+        [placeholder]="facture.montant.toFixed(4)"
+        name="total"
+        class="total"
+        id="total"
+        disabled
+      >
     </div>
+
+    <div class="flex jusitfy-evenly">
+      <button class="btn btn-primary text-white" (click)="onOpenDialog()">
+        Envoyer mail de paiement
+        <span class="material-symbols-outlined">mail</span>
+      </button>
+    </div>
+
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Facture } from "../../utils/models/Facture";
 
 @Component({
@@ -8,4 +8,9 @@ import { Facture } from "../../utils/models/Facture";
 })
 export class FactureCardComponent {
   @Input({ required: true }) facture!: Facture;
+  @Output() openDialog = new EventEmitter<void>();
+
+  onOpenDialog() {
+    this.openDialog.emit();
+  }
 }

@@ -1,48 +1,52 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Facture } from "../../utils/models/Facture";
-import { BehaviorSubject, map, Observable, startWith } from "rxjs";
-import { ResponseHelper } from "../../utils/models/ResponseHelper";
-import { AppState } from "../../utils/app.state";
-import { ApiService } from "../../services/api.service";
+import { Subject, takeUntil } from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { DataState } from "../../utils/enums/DataState";
+import { FactureService } from "../../services/facture.service";
+import { Facture } from "../../utils/models/Facture";
 
 @Component({
   selector: "app-facture-details",
   templateUrl: "./facture.page.html",
   styleUrls: ["./facture.page.css"],
 })
-export class FacturePage implements OnInit {
-  factureState$!: Observable<AppState<ResponseHelper<Facture[]>>>;
-  private dataSubject = new BehaviorSubject<ResponseHelper<Facture[]> | null>(null);
+export class FacturePage implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<boolean> = new Subject();
+  selectedFacture: Facture | null = null;
+  isDialogToggled = false;
 
   constructor(
-    private readonly apiService: ApiService,
+    protected readonly factureService: FactureService,
     private readonly route: ActivatedRoute,
+    private readonly location: Location,
   ) {
   }
 
+  navigateBack(): void {
+    this.location.back();
+  }
+
+  handleDialog(facture?: Facture) {
+    if (facture) {
+      this.selectedFacture = facture;
+    }
+    this.isDialogToggled = !this.isDialogToggled;
+  }
+
   ngOnInit() {
-    this.route.params.subscribe(
-      params => {
-        const id = params["clientId"];
+    this.route.params
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        params => {
+          let id: string = params["clientId"];
+          this.factureService.fetchFacturesByClient(id).subscribe();
+        },
+      );
+  }
 
-        this.factureState$ = this.apiService.facturesByClient$(id).pipe(
-          map((response) => {
-            this.dataSubject.next(response);
-
-            return {
-              dataState: DataState.LOADED,
-              appData: response,
-              errorMessage: response.message,
-            };
-          }),
-          startWith({
-            dataState: DataState.LOADING,
-          }),
-        );
-      },
-    );
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.complete();
   }
 
 }
