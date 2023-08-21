@@ -1,15 +1,22 @@
 <div class="hero h-[125] bg-base-200">
   <div class="hero-content text-center flex items-center justify-center">
-    <span (click)="navigateBack()"
-          class="material-symbols-outlined absolute left-4 class btn btn-error text-2xl text-white hover:bg-error-content/90">arrow_back</span>
+		<span
+      (click)="navigateBack()"
+      class="material-symbols-outlined absolute left-4 class btn btn-error text-2xl text-white hover:bg-error-content/90"
+    >arrow_back</span
+    >
     <div class="max-w-md mx-auto">
-      <h1 class="text-5xl font-bold">Liste des factures de client: </h1>
+      <h1 class="text-5xl font-bold">Liste des factures de client:</h1>
     </div>
   </div>
 </div>
 
 <div class="flex items-center justify-center min-h-screen">
-  <app-send-email-dialog *ngIf="isDialogToggled" (close)="handleDialog()" [facture]="selectedFacture!" />
+  <app-send-email-dialog
+    *ngIf="isDialogToggled"
+    (close)="handleDialog()"
+    [facture]="selectedFacture!"
+  />
 
   <ng-container *ngIf="factureService.factureData$ | async as factureState">
     <div class="flex flex-wrap items-center justify-center h-screen space-x-4">
@@ -21,4 +28,3 @@
     </div>
   </ng-container>
 </div>
-

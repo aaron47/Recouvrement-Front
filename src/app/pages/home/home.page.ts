@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientsState$ = this.userService.$clients.pipe(
+    this.clientsState$ = this.userService.clients$.pipe(
       map((response) => {
         this.dataSubject.next(response);
 

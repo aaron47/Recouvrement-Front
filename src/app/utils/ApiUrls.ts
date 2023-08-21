@@ -4,3 +4,5 @@ export const SINGLE_CLIENT_URL = `${BASE_URL}/clients/`;
 export const ALL_FACTURES_URL = `${BASE_URL}/factures/all`;
 export const ALL_FACTURES_BY_CLIENT_URL = `${BASE_URL}/factures/client/`;
 export const SINGLE_FACTURE_URL = `${BASE_URL}/factures/`;
+export const LOGIN_URL = `${BASE_URL}/auth/authenticate`;
+export const SEND_EMAIL_URL = `${BASE_URL}/email/send`;
