@@ -1,15 +1,9 @@
-import {
-	Component,
-	EventEmitter,
-	Input,
-	OnDestroy,
-	Output,
-} from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Facture } from "../../../utils/models/Facture";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ApiService } from "src/app/services/api.service";
 import { SendEmailRequest } from "src/app/utils/models/SendEmailRequest";
-import { Subject, delay, first, switchMap, takeUntil, tap, timer } from "rxjs";
+import { Subject, first, switchMap, timer } from "rxjs";
 
 @Component({
 	selector: "app-send-email-dialog",
