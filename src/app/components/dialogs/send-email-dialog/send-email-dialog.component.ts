@@ -9,18 +9,19 @@ import { Facture } from "../../../utils/models/Facture";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ApiService } from "src/app/services/api.service";
 import { SendEmailRequest } from "src/app/utils/models/SendEmailRequest";
-import { Subject, delay, switchMap, takeUntil, tap, timer } from "rxjs";
+import { Subject, delay, first, switchMap, takeUntil, tap, timer } from "rxjs";
 
 @Component({
 	selector: "app-send-email-dialog",
 	templateUrl: "./send-email-dialog.component.html",
 	styleUrls: ["./send-email-dialog.component.css"],
 })
-export class SendEmailDialogComponent implements OnDestroy {
+export class SendEmailDialogComponent {
 	@Input({ required: true }) facture!: Facture;
 	@Output() close = new EventEmitter<void>();
-	private unsubscribe$: Subject<boolean> = new Subject();
+
 	sendEmailForm: FormGroup;
+
 	private emailSentSuccessfully = new Subject<string>();
 	emailSentSuccessfully$ = this.emailSentSuccessfully.asObservable();
 
@@ -52,7 +53,7 @@ export class SendEmailDialogComponent implements OnDestroy {
 		this.apiService
 			.sendEmail$(sendEmailRequest)
 			.pipe(
-				takeUntil(this.unsubscribe$),
+				first(),
 				switchMap((res) => {
 					this.emailSentSuccessfully.next(
 						res.data?.["response"] as unknown as string,
@@ -63,10 +64,5 @@ export class SendEmailDialogComponent implements OnDestroy {
 			.subscribe(() => {
 				this.closeDialog();
 			});
-	}
-
-	ngOnDestroy(): void {
-		this.unsubscribe$.next(true);
-		this.unsubscribe$.complete();
 	}
 }
