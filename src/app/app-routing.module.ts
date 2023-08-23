@@ -15,6 +15,7 @@ const routes: Routes = [
 	{
 		path: "login",
 		component: LoginPage,
+		// can still use class-based guards, just gotta use mapToCanActivate(GuardClass)
 		canActivate: [loginPageGuard],
 	},
 	{
