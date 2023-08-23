@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { LoginRequest } from "../utils/models/LoginRequest";
 import { Subject, tap } from "rxjs";
-import { IS_AUTHENTICATED_URL, LOGIN_URL } from "../utils/ApiUrls";
+import { IS_AUTHENTICATED_URL, LOGIN_URL, LOGOUT_URL } from "../utils/ApiUrls";
 import { LoginResponse } from "../utils/models/LoginResponse";
 import { ResponseHelper } from "../utils/models/ResponseHelper";
 import { HttpClient } from "@angular/common/http";
@@ -29,10 +29,26 @@ export class AuthService {
 	}
 
 	getToken(): string | null {
-		if (!this.isAuthenticated()) {
-			return null;
-		}
-
 		return localStorage.getItem("token");
+	}
+
+	logout() {
+		this.http
+			.post(
+				LOGOUT_URL,
+				{},
+				{
+					headers: {
+						Authorization: `Bearer ${this.getToken()}`,
+					},
+				},
+			)
+			.pipe(
+				tap(() => {
+					localStorage.clear();
+					this.authenticated.next(false);
+					window.location.reload();
+				}),
+			);
 	}
 }
