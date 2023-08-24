@@ -33,7 +33,7 @@ export class AuthService {
 	}
 
 	logout() {
-		this.http
+		return this.http
 			.post(
 				LOGOUT_URL,
 				{},
