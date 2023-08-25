@@ -8,9 +8,10 @@ import { FactureModule } from "./pages/facture/facture.module";
 import { HomePage } from "./pages/home/home.page";
 import { LoginPage } from "./pages/login/login.page";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ClientTableComponent } from './components/client-table/client-table.component';
 
 @NgModule({
-	declarations: [AppComponent, ClientCardComponent, HomePage, LoginPage],
+	declarations: [AppComponent, ClientCardComponent, HomePage, LoginPage, ClientTableComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,

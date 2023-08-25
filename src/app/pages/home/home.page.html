@@ -1,15 +1,6 @@
 <div class="hero h-[125] bg-base-200">
 	<div class="hero-content text-center">
-		<div class="max-w-md flex flex-col space-y-4">
-			<h1 class="text-5xl font-bold">Liste des clients</h1>
-			<input
-				type="text"
-				class="border border-gray-300 rounded-md px-4 py-2"
-				placeholder="Chercher clients..."
-				[(ngModel)]="searchTerm"
-				(keyup)="search()"
-			/>
-		</div>
+		<h1 class="text-5xl font-bold">Liste des clients</h1>
 		<button
 			class="btn btn-error text-white absolute right-4"
 			(click)="logout()"
@@ -20,10 +11,51 @@
 </div>
 
 <ng-container *ngIf="clientsState$ | async as clientState">
-	<div class="flex flex-wrap items-center justify-center space-x-4 space-y-4">
-		<app-client-card
-			*ngFor="let client of clientState.appData"
-			[client]="client"
-		/>
-	</div>
+	<app-client-table [clients]="clientState.appData!">
+		<div class="flex items-center mb-4">
+			<!-- Search Box -->
+			<button
+				class="ml-4 btn-primary text-white px-4 py-2 rounded"
+				(click)="toggleFilterOptions()"
+			>
+				Filter
+			</button>
+<!-- 
+			<select
+        class="ml-4 btn-primary text-white px-4 py-2 rounded"
+      >
+        <option selected>TEST DEFAULT OPTION</option>
+        <option value="SERVER_UP">TEST OPTION 1</option>
+        <option value="SERVER_DOWN">TEST OPTION 2</option>
+      </select> -->
+
+			<div class="flex items-center">
+				<div class="relative">
+					<input
+						type="text"
+						class="px-3 py-2 pr-10 rounded border"
+						placeholder="Chercher par nom..."
+						[(ngModel)]="searchTerm"
+						(keyup)="search()"
+					/>
+					<span
+						class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
+					>
+						<svg
+							class="w-5 h-5 text-gray-400"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path d="M21 21l-4.35-4.35"></path>
+							<circle cx="10" cy="10" r="8"></circle>
+						</svg>
+					</span>
+				</div>
+			</div>
+		</div>
+	</app-client-table>
 </ng-container>

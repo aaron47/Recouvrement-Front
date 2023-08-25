@@ -8,7 +8,6 @@ import {
 	combineLatest,
 } from "rxjs";
 import { AppState } from "../../utils/app.state";
-import { ResponseHelper } from "../../utils/models/ResponseHelper";
 import { Client } from "../../utils/models/Client";
 import { ApiService } from "../../services/api.service";
 import { DataState } from "../../utils/enums/DataState";
@@ -26,6 +25,8 @@ export class HomePage implements OnInit {
 
 	searchTerm$ = new BehaviorSubject<string>("");
 	searchTerm = "";
+
+	showFilterOptions = false;
 
 	constructor(
 		private readonly apiService: ApiService,
@@ -48,6 +49,10 @@ export class HomePage implements OnInit {
 				errorMessage: "",
 			}),
 		);
+	}
+
+	toggleFilterOptions() {
+		this.showFilterOptions = !this.showFilterOptions;
 	}
 
 	search() {

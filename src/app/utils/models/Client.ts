@@ -8,5 +8,5 @@ export type Client = {
 	numeroClient: string;
 	addresseDeFacturation: string;
 	type: string;
-	telephone: string;
+	cycle: string;
 };

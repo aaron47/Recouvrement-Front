@@ -1,0 +1,30 @@
+<div class="p-4">
+	<ng-content></ng-content>
+
+	<table class="min-w-full border rounded">
+		<thead class="bg-gray-50">
+			<tr>
+				<ng-container *ngFor="let column of tableColumns">
+					<th class="py-3 px-2 text-left font-semibold border-r text-sm">
+						<div class="flex flex-row items-center">
+							<span class="material-symbols-outlined">{{ column.icon }}</span>
+							{{ column.name }}
+						</div>
+					</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody class="bg-white divide-y divide-gray-200">
+			<tr *ngFor="let client of clients">
+				<td class="py-3 px-4 border-r">{{ client.id }}</td>
+				<td class="py-3 px-4 border-r">{{ client.nom }} {{ client.prenom }}</td>
+				<td class="py-3 px-4 border-r">{{ client.email }}</td>
+				<td class="py-3 px-4 border-r">{{ client.societe }}</td>
+				<td class="py-3 px-4 border-r">{{ client.addresseDeFacturation }}</td>
+				<td class="py-3 px-4 border-r">{{ client.type }}</td>
+				<td class="py-3 px-4 border-r">{{ client.numeroClient }}</td>
+				<td class="py-3 px-4 border-r">{{ client.cycle }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
