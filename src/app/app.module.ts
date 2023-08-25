@@ -7,7 +7,7 @@ import { ClientCardComponent } from "./components/client-card/client-card.compon
 import { FactureModule } from "./pages/facture/facture.module";
 import { HomePage } from "./pages/home/home.page";
 import { LoginPage } from "./pages/login/login.page";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
 	declarations: [AppComponent, ClientCardComponent, HomePage, LoginPage],
@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 		FactureModule,
 		HttpClientModule,
 		ReactiveFormsModule,
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

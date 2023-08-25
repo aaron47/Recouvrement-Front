@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { BehaviorSubject, first, map, Observable, startWith } from "rxjs";
+import {
+	BehaviorSubject,
+	first,
+	map,
+	Observable,
+	startWith,
+	combineLatest,
+} from "rxjs";
 import { AppState } from "../../utils/app.state";
 import { ResponseHelper } from "../../utils/models/ResponseHelper";
 import { Client } from "../../utils/models/Client";
@@ -14,10 +21,11 @@ import { AuthService } from "src/app/services/auth.service";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements OnInit {
-	clientsState$!: Observable<AppState<ResponseHelper<Client[]>>>;
-	private dataSubject = new BehaviorSubject<ResponseHelper<Client[]> | null>(
-		null,
-	);
+	clientsState$!: Observable<AppState<Client[]>>;
+	private dataSubject = new BehaviorSubject<Client[] | null>(null);
+
+	searchTerm$ = new BehaviorSubject<string>("");
+	searchTerm = "";
 
 	constructor(
 		private readonly apiService: ApiService,
@@ -27,11 +35,38 @@ export class HomePage implements OnInit {
 	ngOnInit(): void {
 		this.clientsState$ = this.apiService.clients$.pipe(
 			map((response) => {
-				this.dataSubject.next(response);
+				this.dataSubject.next(response.data?.["clients"]);
 
 				return {
 					dataState: DataState.LOADED,
-					appData: response,
+					appData: response.data?.["clients"],
+					errorMessage: "",
+				};
+			}),
+			startWith({
+				dataState: DataState.LOADING,
+				errorMessage: "",
+			}),
+		);
+	}
+
+	search() {
+		this.searchTerm$.next(this.searchTerm);
+
+		this.clientsState$ = combineLatest([
+			this.apiService.clients$,
+			this.searchTerm$,
+		]).pipe(
+			map(([response, searchTerm]) => {
+				const filteredClients = response.data?.["clients"].filter((client) =>
+					client.nom.toLowerCase().includes(searchTerm.toLowerCase()),
+				);
+
+				this.dataSubject.next(filteredClients);
+
+				return {
+					dataState: DataState.LOADED,
+					appData: filteredClients,
 					errorMessage: "",
 				};
 			}),

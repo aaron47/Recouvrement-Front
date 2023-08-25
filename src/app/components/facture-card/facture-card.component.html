@@ -70,7 +70,7 @@
 		<div id="sum">
 			<input
 				type="text"
-				placeholder="{{ facture.montant.toFixed(4) }} TND"
+				placeholder="{{ facture.montant | currency : 'TND' }}"
 				name="total"
 				class="total"
 				id="total"
