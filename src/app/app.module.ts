@@ -9,9 +9,10 @@ import { HomePage } from "./pages/home/home.page";
 import { LoginPage } from "./pages/login/login.page";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ClientTableComponent } from './components/client-table/client-table.component';
+import { FilterClientsDialogComponent } from './components/dialogs/filter-clients-dialog/filter-clients-dialog.component';
 
 @NgModule({
-	declarations: [AppComponent, ClientCardComponent, HomePage, LoginPage, ClientTableComponent],
+	declarations: [AppComponent, ClientCardComponent, HomePage, LoginPage, ClientTableComponent, FilterClientsDialogComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,

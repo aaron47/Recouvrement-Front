@@ -1,17 +1,25 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	DestroyRef,
+	OnDestroy,
+	OnInit,
+} from "@angular/core";
 import {
 	BehaviorSubject,
 	first,
 	map,
-	Observable,
 	startWith,
-	combineLatest,
+	Subject,
+	takeUntil,
 } from "rxjs";
 import { AppState } from "../../utils/app.state";
 import { Client } from "../../utils/models/Client";
 import { ApiService } from "../../services/api.service";
 import { DataState } from "../../utils/enums/DataState";
 import { AuthService } from "src/app/services/auth.service";
+import { FilterClients } from "src/app/utils/models/FilterClients";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
 	selector: "app-home",
@@ -20,8 +28,9 @@ import { AuthService } from "src/app/services/auth.service";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements OnInit {
-	clientsState$!: Observable<AppState<Client[]>>;
-	private dataSubject = new BehaviorSubject<Client[] | null>(null);
+	private dataSubject = new BehaviorSubject<AppState<Client[]> | null>(null);
+	clientsState$ = this.dataSubject.asObservable().pipe(takeUntilDestroyed());
+	private clientsData: Client[] = [];
 
 	searchTerm$ = new BehaviorSubject<string>("");
 	searchTerm = "";
@@ -31,24 +40,23 @@ export class HomePage implements OnInit {
 	constructor(
 		private readonly apiService: ApiService,
 		private readonly authService: AuthService,
+		private readonly destroyRef: DestroyRef,
 	) {}
 
 	ngOnInit(): void {
-		this.clientsState$ = this.apiService.clients$.pipe(
-			map((response) => {
-				this.dataSubject.next(response.data?.["clients"]);
-
-				return {
-					dataState: DataState.LOADED,
-					appData: response.data?.["clients"],
+		this.apiService.clients$
+			.pipe(
+				takeUntilDestroyed(this.destroyRef),
+				map((response) => {
+					this.clientsData = response.data?.["clients"];
+					this.updateClientsState(this.clientsData);
+				}),
+				startWith({
+					dataState: DataState.LOADING,
 					errorMessage: "",
-				};
-			}),
-			startWith({
-				dataState: DataState.LOADING,
-				errorMessage: "",
-			}),
-		);
+				}),
+			)
+			.subscribe();
 	}
 
 	toggleFilterOptions() {
@@ -58,28 +66,44 @@ export class HomePage implements OnInit {
 	search() {
 		this.searchTerm$.next(this.searchTerm);
 
-		this.clientsState$ = combineLatest([
-			this.apiService.clients$,
-			this.searchTerm$,
-		]).pipe(
-			map(([response, searchTerm]) => {
-				const filteredClients = response.data?.["clients"].filter((client) =>
-					client.nom.toLowerCase().includes(searchTerm.toLowerCase()),
-				);
-
-				this.dataSubject.next(filteredClients);
-
-				return {
-					dataState: DataState.LOADED,
-					appData: filteredClients,
-					errorMessage: "",
-				};
-			}),
-			startWith({
-				dataState: DataState.LOADING,
-				errorMessage: "",
-			}),
+		const filteredClients = this.clientsData.filter((client) =>
+			client.nom.toLowerCase().includes(this.searchTerm.toLowerCase()),
 		);
+
+		this.updateClientsState(filteredClients);
+	}
+
+	filterClients(filter: FilterClients) {
+		let filteredClients = this.clientsData;
+
+		if (filter.type !== "TOUS") {
+			filteredClients = filteredClients.filter(
+				(client) => client.type === filter.type,
+			);
+		}
+
+		if (filter.cycle !== "TOUS") {
+			filteredClients = filteredClients.filter(
+				(client) => client.cycle === filter.cycle,
+			);
+		}
+
+		filteredClients = filteredClients.filter((client) =>
+			client.nom.toLowerCase().includes(this.searchTerm.toLowerCase()),
+		);
+
+		this.updateClientsState(filteredClients);
+	}
+
+	private updateClientsState(clients: Client[]) {
+		const state = {
+			dataState: DataState.LOADED,
+			appData: clients,
+			errorMessage: "",
+		};
+
+		this.dataSubject.next(state);
+		this.clientsState$ = this.dataSubject.asObservable().pipe(takeUntilDestroyed(this.destroyRef));
 	}
 
 	logout() {
