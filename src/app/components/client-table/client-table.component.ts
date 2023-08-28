@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { Router } from "@angular/router";
 import { Client } from "src/app/utils/models/Client";
 
 @Component({
@@ -8,6 +9,10 @@ import { Client } from "src/app/utils/models/Client";
 })
 export class ClientTableComponent {
 	@Input({ required: true }) clients!: Client[];
+
+	constructor(
+		private readonly router: Router,
+	) {}
 
 	tableColumns = [
 		{ name: "Id", icon: "tag" },
@@ -19,4 +24,8 @@ export class ClientTableComponent {
 		{ name: "Telephone", icon: "call" },
 		{ name: "Cycle De Facturation", icon: "calendar_month" },
 	];
+
+	navigateToFactures(clientId: number) {
+		this.router.navigate(["factures", clientId]);
+	}
 }

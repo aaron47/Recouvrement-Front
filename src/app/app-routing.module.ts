@@ -5,7 +5,6 @@ import { HomePage } from "./pages/home/home.page";
 import { LoginPage } from "./pages/login/login.page";
 import { authGuard } from "./guards/auth.guard";
 import { loginPageGuard } from "./guards/login-page.guard";
-import { FilterClientsDialogComponent } from "./components/dialogs/filter-clients-dialog/filter-clients-dialog.component";
 
 const routes: Routes = [
 	{
@@ -23,10 +22,6 @@ const routes: Routes = [
 		path: "factures/:clientId",
 		component: FacturePage,
 		canActivate: [authGuard],
-	},
-	{
-		path: 'test',
-		component: FilterClientsDialogComponent,
 	},
 	{
 		path: "**",

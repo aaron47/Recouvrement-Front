@@ -1,3 +1,4 @@
+import { tap } from "rxjs/operators";
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -20,6 +21,7 @@ import { DataState } from "../../utils/enums/DataState";
 import { AuthService } from "src/app/services/auth.service";
 import { FilterClients } from "src/app/utils/models/FilterClients";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
 	selector: "app-home",
@@ -46,7 +48,6 @@ export class HomePage implements OnInit {
 	ngOnInit(): void {
 		this.apiService.clients$
 			.pipe(
-				takeUntilDestroyed(this.destroyRef),
 				map((response) => {
 					this.clientsData = response.data?.["clients"];
 					this.updateClientsState(this.clientsData);
@@ -55,6 +56,7 @@ export class HomePage implements OnInit {
 					dataState: DataState.LOADING,
 					errorMessage: "",
 				}),
+				takeUntilDestroyed(this.destroyRef),
 			)
 			.subscribe();
 	}
@@ -66,8 +68,10 @@ export class HomePage implements OnInit {
 	search() {
 		this.searchTerm$.next(this.searchTerm);
 
-		const filteredClients = this.clientsData.filter((client) =>
-			client.nom.toLowerCase().includes(this.searchTerm.toLowerCase()),
+		const filteredClients = this.clientsData.filter(
+			(client) =>
+				client.nom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+				client.email.toLowerCase().includes(this.searchTerm.toLowerCase()),
 		);
 
 		this.updateClientsState(filteredClients);
@@ -88,8 +92,10 @@ export class HomePage implements OnInit {
 			);
 		}
 
-		filteredClients = filteredClients.filter((client) =>
-			client.nom.toLowerCase().includes(this.searchTerm.toLowerCase()),
+		filteredClients = filteredClients.filter(
+			(client) =>
+				client.nom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+				client.email.toLowerCase().includes(this.searchTerm.toLowerCase()),
 		);
 
 		this.updateClientsState(filteredClients);
@@ -103,7 +109,9 @@ export class HomePage implements OnInit {
 		};
 
 		this.dataSubject.next(state);
-		this.clientsState$ = this.dataSubject.asObservable().pipe(takeUntilDestroyed(this.destroyRef));
+		this.clientsState$ = this.dataSubject
+			.asObservable()
+			.pipe(takeUntilDestroyed(this.destroyRef));
 	}
 
 	logout() {

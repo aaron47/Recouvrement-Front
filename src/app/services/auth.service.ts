@@ -5,6 +5,8 @@ import { IS_AUTHENTICATED_URL, LOGIN_URL, LOGOUT_URL } from "../utils/ApiUrls";
 import { LoginResponse } from "../utils/models/LoginResponse";
 import { ResponseHelper } from "../utils/models/ResponseHelper";
 import { HttpClient } from "@angular/common/http";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Injectable({
 	providedIn: "root",
@@ -13,7 +15,11 @@ export class AuthService {
 	private readonly authenticated = new Subject<boolean>();
 	public authenticated$ = this.authenticated.asObservable();
 
-	constructor(private readonly http: HttpClient) {}
+	constructor(
+		private readonly http: HttpClient,
+		private readonly toast: ToastrService,
+		private readonly router: Router,
+	) {}
 
 	login$ = (loginRequest: LoginRequest) =>
 		this.http.post<ResponseHelper<LoginResponse>>(LOGIN_URL, loginRequest);
@@ -47,7 +53,8 @@ export class AuthService {
 				tap(() => {
 					localStorage.clear();
 					this.authenticated.next(false);
-					window.location.reload();
+					this.router.navigate(["login"]);
+					this.toast.success("Déconnexion avec succès");
 				}),
 			);
 	}

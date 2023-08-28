@@ -24,6 +24,13 @@
 				<td class="py-3 px-4 border-r">{{ client.type }}</td>
 				<td class="py-3 px-4 border-r">{{ client.numeroClient }}</td>
 				<td class="py-3 px-4 border-r">{{ client.cycle }}</td>
+
+				<td
+					(click)="navigateToFactures(client.id)"
+					class="btn btn-primary py-3 px-4 border-r text-white"
+				>
+					Voir Factures
+				</td>
 			</tr>
 		</tbody>
 	</table>

@@ -13,25 +13,20 @@
 			class="btn btn-error text-white absolute right-4"
 			(click)="logout()"
 		>
-			Logout
+			Déconnexion
 		</button>
 	</div>
 </div>
 
-<div class="flex items-center justify-center min-h-screen">
-	<app-send-email-dialog
-		*ngIf="isDialogToggled"
-		(close)="handleDialog()"
-		[facture]="selectedFacture!"
-	/>
+<app-send-email-dialog
+	*ngIf="isDialogToggled"
+	(close)="handleDialog()"
+	[facture]="selectedFacture!"
+/>
 
-	<ng-container *ngIf="factureService.factureData$ | async as factureState">
-		<div class="flex flex-wrap items-center justify-center h-screen space-x-4">
-			<app-facture-card
-				*ngFor="let facture of factureState.appData?.data?.['factures']"
-				[facture]="facture"
-				(openDialog)="handleDialog(facture)"
-			/>
-		</div>
-	</ng-container>
-</div>
+<ng-container *ngIf="factureService.factureData$ | async as factureState">
+	<app-facture-table
+		[factures]="factureState.appData?.data?.['factures']!"
+		(openDialog)="handleDialog($event)"
+	/>
+</ng-container>
