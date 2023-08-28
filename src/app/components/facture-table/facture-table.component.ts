@@ -4,7 +4,6 @@ import { Facture } from "src/app/utils/models/Facture";
 @Component({
 	selector: "app-facture-table",
 	templateUrl: "./facture-table.component.html",
-	styleUrls: ["./facture-table.component.css"],
 })
 export class FactureTableComponent {
 	@Input({ required: true }) factures!: Facture[];

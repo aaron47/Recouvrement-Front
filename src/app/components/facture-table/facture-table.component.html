@@ -37,6 +37,13 @@
 					}}
 				</td>
 				<td class="py-3 px-4 border-r">{{ facture.description }}</td>
+
+				<td
+					class="btn btn-primary py-3 px-4 border-r text-white"
+					(click)="onOpenDialog(facture)"
+				>
+					Envoyer Mail
+				</td>
 			</tr>
 		</tbody>
 	</table>

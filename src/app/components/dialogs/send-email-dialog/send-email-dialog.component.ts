@@ -8,7 +8,6 @@ import { Subject, first, switchMap, timer } from "rxjs";
 @Component({
 	selector: "app-send-email-dialog",
 	templateUrl: "./send-email-dialog.component.html",
-	styleUrls: ["./send-email-dialog.component.css"],
 })
 export class SendEmailDialogComponent {
 	@Input({ required: true }) facture!: Facture;

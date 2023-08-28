@@ -10,7 +10,6 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 @Component({
 	selector: "app-facture-details",
 	templateUrl: "./facture.page.html",
-	styleUrls: ["./facture.page.css"],
 })
 export class FacturePage implements OnInit {
 	selectedFacture: Facture | null = null;

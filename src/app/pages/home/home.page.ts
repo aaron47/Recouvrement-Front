@@ -21,12 +21,10 @@ import { DataState } from "../../utils/enums/DataState";
 import { AuthService } from "src/app/services/auth.service";
 import { FilterClients } from "src/app/utils/models/FilterClients";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { ToastrService } from "ngx-toastr";
 
 @Component({
 	selector: "app-home",
 	templateUrl: "./home.page.html",
-	styleUrls: ["./home.page.css"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements OnInit {

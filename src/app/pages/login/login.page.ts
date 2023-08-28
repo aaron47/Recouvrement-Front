@@ -5,12 +5,11 @@ import { AuthService } from "src/app/services/auth.service";
 import { Router } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ToastrService } from "ngx-toastr";
-import { EMPTY, of } from "rxjs";
+import { of } from "rxjs";
 
 @Component({
 	selector: "app-login",
 	templateUrl: "./login.page.html",
-	styleUrls: ["./login.page.css"],
 })
 export class LoginPage {
 	loginForm: FormGroup;

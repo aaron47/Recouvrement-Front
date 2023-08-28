@@ -1,4 +1,4 @@
-import { FactureTableComponent } from './../../components/facture-table/facture-table.component';
+import { FactureTableComponent } from "./../../components/facture-table/facture-table.component";
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FacturePage } from "./facture.page";
@@ -7,11 +7,12 @@ import { SendEmailDialogComponent } from "../../components/dialogs/send-email-di
 import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-	declarations: [FacturePage, FactureCardComponent, SendEmailDialogComponent, FactureTableComponent],
-	imports: [
-		ReactiveFormsModule,
-		CommonModule,
+	declarations: [
+		FacturePage,
+		FactureCardComponent,
+		SendEmailDialogComponent,
+		FactureTableComponent,
 	],
+	imports: [ReactiveFormsModule, CommonModule],
 })
-export class FactureModule {
-}
+export class FactureModule {}
