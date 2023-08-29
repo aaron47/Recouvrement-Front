@@ -1,10 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FacturePage } from "./pages/facture/facture.page";
-import { HomePage } from "./pages/home/home.page";
-import { LoginPage } from "./pages/login/login.page";
-import { authGuard } from "./guards/auth.guard";
-import { loginPageGuard } from "./guards/login-page.guard";
+import { FacturePage } from "./modules/facture/pages/facture/facture.page";
+import { authGuard, loginPageGuard } from "@guards";
+import { HomePage } from "@core/pages/home/home.page";
+import { LoginPage } from "@core/pages/login/login.page";
 
 const routes: Routes = [
 	{
