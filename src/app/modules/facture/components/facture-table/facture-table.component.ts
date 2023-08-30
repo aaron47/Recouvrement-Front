@@ -1,9 +1,16 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	Input,
+	Output,
+} from "@angular/core";
 import { Facture } from "@models";
 
 @Component({
 	selector: "app-facture-table",
 	templateUrl: "./facture-table.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FactureTableComponent {
 	@Input({ required: true }) factures!: Facture[];
@@ -18,7 +25,7 @@ export class FactureTableComponent {
 		{ name: "Description", icon: "description" },
 	];
 
-  onOpenDialog(facture: Facture) {
-    this.openDialog.emit(facture);
-  }
+	onOpenDialog(facture: Facture) {
+		this.openDialog.emit(facture);
+	}
 }

@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { FilterClients } from "@models";
 
 @Component({
 	selector: "app-filter-clients-dialog",
 	templateUrl: "./filter-clients-dialog.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterClientsDialogComponent {
 	filterClientsForm!: FormGroup;

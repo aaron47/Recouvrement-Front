@@ -1,10 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { Client } from "@models";
 
 @Component({
 	selector: "app-client-table",
 	templateUrl: "./client-table.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientTableComponent {
 	@Input({ required: true }) clients!: Client[];

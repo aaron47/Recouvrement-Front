@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	Input,
+	Output,
+} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subject, first, switchMap, timer } from "rxjs";
 import { Facture, SendEmailRequest } from "@models";
@@ -7,6 +13,7 @@ import { ApiService } from "@services";
 @Component({
 	selector: "app-send-email-dialog",
 	templateUrl: "./send-email-dialog.component.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SendEmailDialogComponent {
 	@Input({ required: true }) facture!: Facture;

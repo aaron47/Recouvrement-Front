@@ -1,5 +1,5 @@
 import { first } from "rxjs";
-import { Component, DestroyRef, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -10,6 +10,7 @@ import { AuthService } from "@services";
 @Component({
 	selector: "app-facture-details",
 	templateUrl: "./facture.page.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FacturePage implements OnInit {
 	selectedFacture: Facture | null = null;

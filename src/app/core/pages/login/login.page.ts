@@ -1,4 +1,4 @@
-import { Component, DestroyRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, DestroyRef } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { catchError, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
@@ -10,6 +10,7 @@ import { AuthService } from "@services";
 @Component({
 	selector: "app-login",
 	templateUrl: "./login.page.html",
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPage {
 	loginForm: FormGroup;
