@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 		LoginPage,
     HomePage,
 	],
-	exports: [SendEmailDialogComponent, FilterClientsDialogComponent, LoginPage],
+	exports: [SendEmailDialogComponent, FilterClientsDialogComponent, LoginPage, HomePage],
 	imports: [CommonModule, ClientsModule, ReactiveFormsModule, FormsModule],
 })
 export class CoreModule {}

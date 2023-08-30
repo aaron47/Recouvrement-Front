@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-<ng-container *ngIf="clientsState$ | async as clientState">
+<ng-container *ngIf="clientsService.clientsState$| async as clientState">
 	<app-client-table [clients]="clientState.appData!">
 		<div class="flex items-center mb-4">
 			<!-- Search Box -->
