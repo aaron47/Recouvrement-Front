@@ -12,14 +12,19 @@ export class FilterClientsDialogComponent {
 	@Output() close = new EventEmitter<void>();
 
 	constructor(private readonly formBuilder: FormBuilder) {
+		const lastType = localStorage.getItem("lastType") || "TOUS";
+		const lastCycle = localStorage.getItem("lastCycle") || "TOUS";
+
 		this.filterClientsForm = this.formBuilder.group({
-			type: ["TOUS", []],
-			cycle: ["TOUS", []],
+			type: [lastType, []],
+			cycle: [lastCycle, []],
 		});
 	}
 
 	onSubmit(): void {
-		console.log(this.filterClientsForm.value);
+		localStorage.setItem("lastType", this.filterClientsForm.value.type);
+		localStorage.setItem("lastCycle", this.filterClientsForm.value.cycle);
+
 		this.filterClients.emit(this.filterClientsForm.value);
 		this.closeDialog();
 	}
