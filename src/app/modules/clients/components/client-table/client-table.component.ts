@@ -10,9 +10,7 @@ import { Client } from "@models";
 export class ClientTableComponent {
 	@Input({ required: true }) clients!: Client[];
 
-	constructor(
-		private readonly router: Router,
-	) {}
+	constructor(private readonly router: Router) {}
 
 	tableColumns = [
 		{ name: "Id", icon: "tag" },
@@ -24,6 +22,14 @@ export class ClientTableComponent {
 		{ name: "Telephone", icon: "call" },
 		{ name: "Cycle De Facturation", icon: "calendar_month" },
 	];
+
+	trackByFnColumn(index: number, column: { name: string; icon: string }) {
+		return column.name;
+	}
+
+	trackByFnClient(index: number, client: Client) {
+		return client.id;
+	}
 
 	navigateToFactures(clientId: number) {
 		this.router.navigate(["factures", clientId]);

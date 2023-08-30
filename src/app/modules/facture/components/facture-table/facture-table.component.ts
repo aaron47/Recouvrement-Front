@@ -25,6 +25,14 @@ export class FactureTableComponent {
 		{ name: "Description", icon: "description" },
 	];
 
+	trackByFnColumn(index: number, column: { name: string, icon: string }) {
+		return column.name;
+	}
+
+	trackByFnFacture(index: number, facture: Facture) {
+		return facture.id;
+	}
+
 	onOpenDialog(facture: Facture) {
 		this.openDialog.emit(facture);
 	}

@@ -4,7 +4,9 @@
 	<table class="min-w-full border rounded">
 		<thead class="bg-gray-50">
 			<tr>
-				<ng-container *ngFor="let column of tableColumns">
+				<ng-container
+					*ngFor="let column of tableColumns; trackBy: trackByFnColumn"
+				>
 					<th
 						class="py-3 px-2 font-semibold border-r border-b text-sm text-left"
 					>
@@ -17,7 +19,7 @@
 			</tr>
 		</thead>
 		<tbody class="bg-white divide-y divide-gray-200">
-			<tr *ngFor="let client of clients">
+			<tr *ngFor="let client of clients; trackBy: trackByFnClient">
 				<td class="py-3 px-4 border-r">{{ client.id }}</td>
 				<td class="py-3 px-4 border-r">{{ client.nom }} {{ client.prenom }}</td>
 				<td class="py-3 px-4 border-r">{{ client.email }}</td>
