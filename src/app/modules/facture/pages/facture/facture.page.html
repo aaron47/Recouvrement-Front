@@ -31,11 +31,10 @@
 
 <ng-container *ngIf="factureService.factureData$ | async as factureState">
 	<app-facture-table
-		[factures]="factureState.appData?.data?.['factures']!"
+		[factures]="factureState.appData!"
 		(openDialog)="handleDialog($event)"
 	>
 		<button
-			*ngIf="factureState.appData?.data?.['factures']?.length"
 			class="m-4 btn-primary text-white px-4 py-2 rounded"
 			(click)="handleFilterFactureDialog()"
 		>
