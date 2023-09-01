@@ -25,12 +25,6 @@ export class FactureService {
 				this.originalFactureData = response.data?.["factures"];
 				this.factureData = [...this.originalFactureData];
 				this.updateFactureState(this.factureData);
-
-				// return {
-				// 	dataState: DataState.LOADED,
-				// 	appData: response,
-				// 	errorMessage: response.message,
-				// };
 			}),
 			catchError((error) => {
 				this.factureDataSubject.next({
@@ -43,29 +37,6 @@ export class FactureService {
 			}),
 		);
 	}
-
-	// filterFacturesByDate(startDate: Date, endDate: Date) {
-	// 	this.factureDataSubject
-	// 		.pipe(
-	// 			map((state) => {
-	// 				if (state && state.appData) {
-	// 					const filteredFactures = state.appData.filter((facture) => {
-	// 						const factureDate = new Date(facture.dateEcheance);
-	// 						return factureDate >= startDate && factureDate <= endDate;
-	// 					});
-
-	// 					return {
-	// 						...state,
-	// 						appData: [...filteredFactures],
-	// 					};
-	// 				}
-	// 				return state;
-	// 			}),
-	// 		)
-	// 		.subscribe((filteredState) => {
-	// 			this.factureDataSubject.next(filteredState!);
-	// 		});
-	// }
 
 	filterFacturesByDate(startDate: Date, endDate: Date) {
 		let filteredFactures = this.originalFactureData.filter((facture) => {

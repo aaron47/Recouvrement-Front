@@ -43,10 +43,20 @@
 				/>
 			</div>
 
+			<div
+				*ngIf="filterFactureForm.hasError('dateRangeError')"
+				class="text-red-500"
+			>
+				La date de début ne peut pas être ultérieure à la date de fin et vice versa.
+			</div>
+
 			<div class="flex justify-between w-full px-3">
 				<button
-					class="shadow bg-primary hover:bg-primary/60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
+					class="shadow bg-primary hover:bg-primary/60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded {{
+						filterFactureForm.invalid ? 'cursor-not-allowed' : ''
+					}}"
 					type="submit"
+					[disabled]="filterFactureForm.invalid"
 				>
 					Filtrer
 				</button>

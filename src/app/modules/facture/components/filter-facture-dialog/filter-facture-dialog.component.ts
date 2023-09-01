@@ -17,13 +17,20 @@ export class FilterFactureDialogComponent {
 		const startDate = localStorage.getItem("startDate") || null;
 		const endDate = localStorage.getItem("endDate") || null;
 
-		this.filterFactureForm = this.formBuilder.group({
-			startDate: [startDate],
-			endDate: [endDate],
-		});
+		this.filterFactureForm = this.formBuilder.group(
+			{
+				startDate: [startDate],
+				endDate: [endDate],
+			},
+			{ validators: this.dateRangeValidator },
+		);
 	}
 
-	onSubmit() {
+  onSubmit() {
+    if (this.filterFactureForm.invalid) {
+      return;
+    }
+
 		localStorage.setItem("startDate", this.filterFactureForm.value.startDate);
 		localStorage.setItem("endDate", this.filterFactureForm.value.endDate);
 		const startDate = new Date(this.filterFactureForm.value.startDate);
@@ -34,5 +41,16 @@ export class FilterFactureDialogComponent {
 
 	closeDialog(): void {
 		this.close.emit();
+	}
+
+	private dateRangeValidator(formGroup: FormGroup) {
+		const startDate = formGroup.get("startDate")!.value;
+		const endDate = formGroup.get("endDate")!.value;
+
+		if (startDate && endDate && (startDate > endDate || endDate < startDate)) {
+			return { dateRangeError: true };
+		}
+
+		return null;
 	}
 }
