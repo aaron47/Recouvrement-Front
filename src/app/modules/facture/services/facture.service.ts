@@ -43,4 +43,35 @@ export class FactureService {
 			}),
 		);
 	}
+
+	filterFacturesByDate(startDate: Date, endDate: Date) {
+		this.factureDataSubject
+			.pipe(
+				map((state) => {
+					if (state && state.appData) {
+						const filteredFactures = state.appData?.data?.["factures"].filter(
+							(facture) => {
+								const factureDate = new Date(facture.dateEcheance);
+								return factureDate >= startDate && factureDate <= endDate;
+							},
+						);
+
+						return {
+							...state,
+							appData: {
+								...state.appData,
+								data: {
+									...state.appData.data,
+									factures: filteredFactures,
+								},
+							},
+						};
+					}
+					return state;
+				}),
+			)
+			.subscribe((filteredState) => {
+				this.factureDataSubject.next(filteredState!);
+			});
+	}
 }

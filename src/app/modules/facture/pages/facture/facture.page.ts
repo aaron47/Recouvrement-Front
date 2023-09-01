@@ -15,6 +15,7 @@ import { AuthService } from "@services";
 export class FacturePage implements OnInit {
 	selectedFacture: Facture | null = null;
 	isDialogToggled = false;
+	isFilterFactureDialogToggled = false;
 
 	constructor(
 		protected readonly factureService: FactureService,
@@ -33,6 +34,10 @@ export class FacturePage implements OnInit {
 			this.selectedFacture = facture;
 		}
 		this.isDialogToggled = !this.isDialogToggled;
+	}
+
+	handleFilterFactureDialog() {
+		this.isFilterFactureDialogToggled = !this.isFilterFactureDialogToggled;
 	}
 
 	ngOnInit(): void {

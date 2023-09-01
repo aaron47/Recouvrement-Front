@@ -25,9 +25,9 @@
 				<td class="py-3 px-4 border-r">{{ client.email }}</td>
 				<td class="py-3 px-4 border-r">{{ client.societe }}</td>
 				<td class="py-3 px-4 border-r">{{ client.addresseDeFacturation }}</td>
-				<td class="py-3 px-4 border-r">{{ client.type }}</td>
+				<td class="py-3 px-4 border-r capitalize">{{ client.type.toLowerCase() }}</td>
 				<td class="py-3 px-4 border-r">{{ client.numeroClient }}</td>
-				<td class="py-3 px-4 border-r">{{ client.cycle }}</td>
+				<td class="py-3 px-4 border-r capitalize">{{ client.cycle.toLowerCase() }}</td>
 
 				<td
 					(click)="navigateToFactures(client.id)"

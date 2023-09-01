@@ -4,7 +4,8 @@ export type Facture = {
 	id: number;
 	client: Client;
 	montant: number;
-	dateFacture: string[];
+	dateFacture: string;
 	description: string;
-	dateEcheance: string[];
+	dateEcheance: string;
+	factureStatus: string;
 };

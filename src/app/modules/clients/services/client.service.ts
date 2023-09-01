@@ -35,7 +35,7 @@ export class ClientService {
 			.subscribe();
 	}
 
-	updateClientsState(clients: Client[]) {
+	private updateClientsState(clients: Client[]) {
 		const state = {
 			dataState: DataState.LOADED,
 			appData: clients,
