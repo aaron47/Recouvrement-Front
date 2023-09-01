@@ -23,9 +23,10 @@ export class FactureTableComponent {
 		{ name: "Date De Facturation", icon: "calendar_today" },
 		{ name: "Date D'échéance", icon: "calendar_today" },
 		{ name: "Description", icon: "description" },
+		{ name: "Status", icon: "payments" },
 	];
 
-	trackByFnColumn(index: number, column: { name: string, icon: string }) {
+	trackByFnColumn(index: number, column: { name: string; icon: string }) {
 		return column.name;
 	}
 

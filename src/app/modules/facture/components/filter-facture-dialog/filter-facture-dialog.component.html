@@ -1,0 +1,56 @@
+<div class="fixed inset-0">
+	<div
+		class="absolute inset-0 bg-black opacity-50"
+		(click)="closeDialog()"
+	></div>
+	<div
+		class="w-[700px] mx-auto p-5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50"
+	>
+		<div class="text-center mb-6">
+			<p class="mt-4 text-sm leading-7 text-gray-500 font-regular uppercase">
+				Choisissez comment filtrer
+			</p>
+		</div>
+
+		<form
+			[formGroup]="filterFactureForm"
+			class="w-full"
+			(ngSubmit)="onSubmit()"
+		>
+			<div class="flex flex-wrap mb-6">
+				<label
+					class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+				>
+					Date de début
+				</label>
+				<input
+					type="date"
+					formControlName="startDate"
+					class="ml-4 btn-accent text-white px-4 py-2 rounded w-fit"
+				/>
+			</div>
+
+			<div class="flex flex-wrap mb-6">
+				<label
+					class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+				>
+					Date de fin
+				</label>
+				<input
+					type="date"
+					formControlName="endDate"
+					class="ml-4 btn-accent text-white px-4 py-2 rounded w-fit"
+				/>
+			</div>
+
+			<div class="flex justify-between w-full px-3">
+				<button
+					class="shadow bg-primary hover:bg-primary/60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
+					type="submit"
+				>
+					Filtrer
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
