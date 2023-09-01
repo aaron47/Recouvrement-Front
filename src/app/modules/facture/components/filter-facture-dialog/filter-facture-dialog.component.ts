@@ -26,7 +26,7 @@ export class FilterFactureDialogComponent {
 	onSubmit() {
 		localStorage.setItem("startDate", this.filterFactureForm.value.startDate);
 		localStorage.setItem("endDate", this.filterFactureForm.value.endDate);
-		const startDate = new Date(this.filterFactureForm.value.endDate);
+		const startDate = new Date(this.filterFactureForm.value.startDate);
 		const endDate = new Date(this.filterFactureForm.value.endDate);
 		this.factureService.filterFacturesByDate(startDate, endDate);
 		this.close.emit();
