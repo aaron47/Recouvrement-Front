@@ -19,15 +19,25 @@
 			</tr>
 		</thead>
 		<tbody class="bg-white divide-y divide-gray-200">
-			<tr *ngFor="let client of clients; trackBy: trackByFnClient">
+			<tr
+				*ngFor="
+					let client of clients
+						| paginate : { itemsPerPage: calculateItemsPerPage(), currentPage: p };
+					trackBy: trackByFnClient
+				"
+			>
 				<td class="py-3 px-4 border-r">{{ client.id }}</td>
 				<td class="py-3 px-4 border-r">{{ client.nom }} {{ client.prenom }}</td>
 				<td class="py-3 px-4 border-r">{{ client.email }}</td>
 				<td class="py-3 px-4 border-r">{{ client.societe }}</td>
 				<td class="py-3 px-4 border-r">{{ client.addresseDeFacturation }}</td>
-				<td class="py-3 px-4 border-r capitalize">{{ client.type.toLowerCase() }}</td>
+				<td class="py-3 px-4 border-r capitalize">
+					{{ client.type.toLowerCase() }}
+				</td>
 				<td class="py-3 px-4 border-r">{{ client.numeroClient }}</td>
-				<td class="py-3 px-4 border-r capitalize">{{ client.cycle.toLowerCase() }}</td>
+				<td class="py-3 px-4 border-r capitalize">
+					{{ client.cycle.toLowerCase() }}
+				</td>
 
 				<td
 					(click)="navigateToFactures(client.id)"
@@ -38,4 +48,9 @@
 			</tr>
 		</tbody>
 	</table>
+	<div class="flex justify-center items-center my-4">
+		<pagination-controls
+			(pageChange)="onPageChange($event)"
+		></pagination-controls>
+	</div>
 </div>

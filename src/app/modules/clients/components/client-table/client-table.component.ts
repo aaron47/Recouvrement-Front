@@ -12,6 +12,8 @@ export class ClientTableComponent {
 
 	constructor(private readonly router: Router) {}
 
+	p: number = 1;
+
 	tableColumns = [
 		{ name: "Id", icon: "tag" },
 		{ name: "Nom", icon: "badge" },
@@ -34,4 +36,15 @@ export class ClientTableComponent {
 	navigateToFactures(clientId: number) {
 		this.router.navigate(["factures", clientId]);
 	}
+
+	onPageChange(pageNumber: number) {
+		this.p = pageNumber;
+		window.scrollTo(0, 0);
+	}
+
+	calculateItemsPerPage(): number {
+		const desiredItemsPerPage = 15;
+		return Math.ceil(this.clients.length / desiredItemsPerPage);
+	}
+
 }

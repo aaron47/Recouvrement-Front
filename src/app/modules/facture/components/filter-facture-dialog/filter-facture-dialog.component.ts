@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FactureService } from "../../services/facture.service";
 
 @Component({
@@ -26,10 +26,10 @@ export class FilterFactureDialogComponent {
 		);
 	}
 
-  onSubmit() {
-    if (this.filterFactureForm.invalid) {
-      return;
-    }
+	onSubmit() {
+		if (this.filterFactureForm.invalid) {
+			return;
+		}
 
 		localStorage.setItem("startDate", this.filterFactureForm.value.startDate);
 		localStorage.setItem("endDate", this.filterFactureForm.value.endDate);
