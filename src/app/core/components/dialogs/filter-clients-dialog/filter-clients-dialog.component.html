@@ -1,5 +1,8 @@
 <div class="fixed inset-0">
-	<div class="absolute inset-0 bg-black opacity-50" (click)="closeDialog()"></div>
+	<div
+		class="absolute inset-0 bg-black opacity-50"
+		(click)="closeDialog()"
+	></div>
 	<div
 		class="w-[700px] mx-auto p-5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50"
 	>
@@ -9,14 +12,21 @@
 			</p>
 		</div>
 
-		<form [formGroup]="filterClientsForm" class="w-full" (ngSubmit)="onSubmit()">
-			<div class="flex flex-col flex-wrap mb-6 ">
+		<form
+			[formGroup]="filterClientsForm"
+			class="w-full"
+			(ngSubmit)="onSubmit()"
+		>
+			<div class="flex flex-col flex-wrap mb-6">
 				<label
 					class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
 				>
 					Type de client
 				</label>
-				<select formControlName="type" class="ml-4 btn-accent text-white px-4 py-2 rounded w-fit">
+				<select
+					formControlName="type"
+					class="ml-4 btn-accent text-white px-4 py-2 rounded w-fit"
+				>
 					<option selected>TOUS</option>
 					<option value="PERSONNE">PERSONNE</option>
 					<option value="SOCIETE">SOCIETE</option>
@@ -30,7 +40,10 @@
 					>
 						Cycle de facturation
 					</label>
-					<select formControlName="cycle" class="ml-4 btn-accent text-white px-4 py-2 rounded w-fit">
+					<select
+						formControlName="cycle"
+						class="ml-4 btn-accent text-white px-4 py-2 rounded w-fit"
+					>
 						<option selected>TOUS</option>
 						<option value="MENSUEL">MENSUEL</option>
 						<option value="TRIMESTRIEL">TRIMESTRIEL</option>
@@ -39,21 +52,6 @@
 					</select>
 				</div>
 			</div>
-
-			<!-- <div class="flex flex-wrap -mx-3 mb-6">
-				<div class="w-full px-3">
-					<label
-						class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-					>
-						Votre Message
-					</label>
-					<textarea
-						rows="10"
-						class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-						formControlName="msgBody"
-					></textarea>
-				</div>
-			</div> -->
 
 			<div class="flex justify-between w-full px-3">
 				<button

@@ -22,7 +22,8 @@
 			<tr
 				*ngFor="
 					let client of clients
-						| paginate : { itemsPerPage: calculateItemsPerPage(), currentPage: p };
+						| paginate
+							: { itemsPerPage: calculateItemsPerPage(), currentPage: p };
 					trackBy: trackByFnClient
 				"
 			>

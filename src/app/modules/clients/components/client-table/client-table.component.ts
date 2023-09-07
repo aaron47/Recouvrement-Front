@@ -43,8 +43,22 @@ export class ClientTableComponent {
 	}
 
 	calculateItemsPerPage(): number {
-		const desiredItemsPerPage = 15;
-		return Math.ceil(this.clients.length / desiredItemsPerPage);
-	}
+		const totalClients = this.clients.length;
 
+		if (totalClients <= 100) {
+			return totalClients;
+		} else if (totalClients <= 500) {
+			const minPageSize = Math.ceil(totalClients / 10); // dividing by maximum desired pages
+			const maxPageSize = Math.ceil(totalClients / 5); // dividing by minimum desired pages
+
+			// Check which page size is closest to 100 and return that
+			return Math.abs(100 - minPageSize) < Math.abs(100 - maxPageSize)
+				? minPageSize
+				: maxPageSize;
+		} else if (totalClients <= 1000) {
+			return 100;
+		} else {
+			return 200;
+		}
+	}
 }

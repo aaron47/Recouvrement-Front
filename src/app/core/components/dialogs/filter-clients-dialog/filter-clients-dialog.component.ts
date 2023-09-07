@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from "@angular/core";
+import {
+	ChangeDetectionStrategy,
+	Component,
+	EventEmitter,
+	Output,
+} from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { FilterClients } from "@models";
 
