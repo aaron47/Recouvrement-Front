@@ -21,9 +21,7 @@
 		<tbody class="bg-white divide-y divide-gray-200">
 			<tr
 				*ngFor="
-					let client of clients
-						| paginate
-							: { itemsPerPage: calculateItemsPerPage(), currentPage: p };
+					let client of clients | paginate: { itemsPerPage: calculateItemsPerPage(), currentPage: p };
 					trackBy: trackByFnClient
 				"
 			>
@@ -50,8 +48,6 @@
 		</tbody>
 	</table>
 	<div class="flex justify-center items-center my-4">
-		<pagination-controls
-			(pageChange)="onPageChange($event)"
-		></pagination-controls>
+		<pagination-controls (pageChange)="onPageChange($event)" />
 	</div>
 </div>

@@ -4,12 +4,18 @@ import {
 	ALL_CLIENTS_URL,
 	ALL_FACTURES_BY_CLIENT_URL,
 	ALL_FACTURES_URL,
+	CLIENT_STATISTICS_BY_CYCLE_URL,
+	CLIENT_STATISTICS_BY_ROLE_URL,
 	SEND_EMAIL_URL,
 	SINGLE_CLIENT_URL,
 	SINGLE_FACTURE_URL,
 } from "@utils";
 import { AuthService } from "@services";
 import { Client, Facture, ResponseHelper, SendEmailRequest } from "@models";
+import {
+	ClientStatisticsByCycle,
+	ClientStatisticsByRole,
+} from "../models/ClientStatistics";
 
 @Injectable({
 	providedIn: "root",
@@ -62,6 +68,26 @@ export class ApiService {
 		this.http.post<ResponseHelper<{ response: string }>>(
 			SEND_EMAIL_URL,
 			sendEmailRequest,
+			{
+				headers: {
+					Authorization: `Bearer ${this.authService.getToken()}`,
+				},
+			},
+		);
+
+	public getClientStatisticsByRole$ = () =>
+		this.http.get<ResponseHelper<ClientStatisticsByRole>>(
+			CLIENT_STATISTICS_BY_ROLE_URL,
+			{
+				headers: {
+					Authorization: `Bearer ${this.authService.getToken()}`,
+				},
+			},
+		);
+
+	public getClientStatisticsByCycle$ = () =>
+		this.http.get<ResponseHelper<ClientStatisticsByCycle>>(
+			CLIENT_STATISTICS_BY_CYCLE_URL,
 			{
 				headers: {
 					Authorization: `Bearer ${this.authService.getToken()}`,

@@ -4,6 +4,7 @@ import { FacturePage } from "./modules/facture/pages/facture/facture.page";
 import { authGuard, loginPageGuard } from "@guards";
 import { HomePage } from "@core/pages/home/home.page";
 import { LoginPage } from "@core/pages/login/login.page";
+import { StatisticsPage } from "./modules/statistics/pages/statistics.page";
 
 const routes: Routes = [
 	{
@@ -20,6 +21,11 @@ const routes: Routes = [
 	{
 		path: "factures/:clientId",
 		component: FacturePage,
+		canActivate: [authGuard],
+	},
+	{
+		path: "statistics",
+		component: StatisticsPage,
 		canActivate: [authGuard],
 	},
 	{
