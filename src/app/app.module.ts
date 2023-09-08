@@ -6,6 +6,8 @@ import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 import { FactureModule } from "./modules/facture/facture.module";
 import { ToastrModule } from "ngx-toastr";
+import { NgChartsModule } from "ng2-charts";
+import { StatisticsModule } from "./modules/statistics/statistics.module";
 
 @NgModule({
 	declarations: [AppComponent],
@@ -20,6 +22,8 @@ import { ToastrModule } from "ngx-toastr";
 			positionClass: "toast-bottom-right",
 			preventDuplicates: true,
 		}),
+		NgChartsModule,
+		StatisticsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

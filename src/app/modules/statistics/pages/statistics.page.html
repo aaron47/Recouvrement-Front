@@ -1,1 +1,20 @@
-<p>statistics works!</p>
+<div class="flex flex-col space-y-4" *ngIf="statistics$ | async">
+	<canvas
+		baseChart
+		[data]="clientTypeData!"
+		[options]="barChartOptions"
+		[plugins]="barChartPlugins"
+		[legend]="barChartLegend"
+		[type]="'bar'"
+	></canvas>
+
+	<canvas
+		baseChart
+		[data]="cycleFacturationData!"
+		[options]="barChartOptions"
+		[plugins]="barChartPlugins"
+		[legend]="barChartLegend"
+		[type]="'bar'"
+	>
+	</canvas>
+</div>
