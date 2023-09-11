@@ -1,0 +1,15 @@
+services:
+  recouvrement-front:
+    container_name: recouvrement-container
+    build: .
+    image: recouvrement:v1
+    ports:
+      - 80:80
+    expose:
+      - 80
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge

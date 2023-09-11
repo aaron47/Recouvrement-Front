@@ -1,4 +1,6 @@
-export const BASE_URL = "http://localhost:8080/api/v1";
+import { environment } from "src/environments/environment";
+
+export const BASE_URL = environment.API_BASE_URL;
 export const ALL_CLIENTS_URL = `${BASE_URL}/clients/all`;
 export const SINGLE_CLIENT_URL = `${BASE_URL}/clients/`;
 export const ALL_FACTURES_URL = `${BASE_URL}/factures/all`;
