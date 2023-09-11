@@ -3,6 +3,7 @@ import { BehaviorSubject, first } from "rxjs";
 import { FilterClients } from "@models";
 import { AuthService } from "@services";
 import { ClientService } from "src/app/modules/clients/services/client.service";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "app-home",
@@ -17,6 +18,7 @@ export class HomePage implements OnInit {
 
 	constructor(
 		private readonly authService: AuthService,
+		private readonly router: Router,
 		protected readonly clientsService: ClientService,
 	) {}
 
@@ -37,5 +39,9 @@ export class HomePage implements OnInit {
 
 	logout() {
 		this.authService.logout().pipe(first()).subscribe();
+	}
+
+	navigateToStatistics() {
+		this.router.navigate(["statistics"]);
 	}
 }

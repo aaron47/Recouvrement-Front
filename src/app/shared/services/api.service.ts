@@ -6,6 +6,7 @@ import {
 	ALL_FACTURES_URL,
 	CLIENT_STATISTICS_BY_CYCLE_URL,
 	CLIENT_STATISTICS_BY_ROLE_URL,
+	FACTURE_STATISTICS_URL,
 	SEND_EMAIL_URL,
 	SINGLE_CLIENT_URL,
 	SINGLE_FACTURE_URL,
@@ -16,6 +17,7 @@ import {
 	ClientStatisticsByCycle,
 	ClientStatisticsByRole,
 } from "../models/ClientStatistics";
+import { FactureStatistics } from "../models/FactureStatistics";
 
 @Injectable({
 	providedIn: "root",
@@ -94,4 +96,11 @@ export class ApiService {
 				},
 			},
 		);
+
+	public getFactureStatistics$ = () =>
+		this.http.get<ResponseHelper<FactureStatistics>>(FACTURE_STATISTICS_URL, {
+			headers: {
+				Authorization: `Bearer ${this.authService.getToken()}`,
+			},
+		});
 }

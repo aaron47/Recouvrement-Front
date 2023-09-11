@@ -5,6 +5,7 @@ import {
 	ClientStatisticsByCycle,
 	ClientStatisticsByRole,
 } from "src/app/shared/models/ClientStatistics";
+import { FactureStatistics } from "src/app/shared/models/FactureStatistics";
 
 @Injectable({
 	providedIn: "root",
@@ -13,17 +14,19 @@ export class StatisticsService {
 	constructor(private readonly apiService: ApiService) {}
 
 	fetchAllStatistics$(): Observable<
-		ClientStatisticsByRole & ClientStatisticsByCycle
+		ClientStatisticsByRole & ClientStatisticsByCycle & FactureStatistics
 	> {
 		return forkJoin({
 			roleStats: this.apiService.getClientStatisticsByRole$(),
 			cycleStats: this.apiService.getClientStatisticsByCycle$(),
+			factureStats: this.apiService.getFactureStatistics$(),
 		}).pipe(
 			mergeMap((data) => {
 				return [
 					{
 						...data.roleStats.data["statistics"],
 						...data.cycleStats.data["statistics"],
+						...data.factureStats.data["statistics"],
 					},
 				];
 			}),

@@ -10,3 +10,4 @@ export const IS_AUTHENTICATED_URL = `${BASE_URL}/auth/me`;
 export const LOGOUT_URL = `${BASE_URL}/auth/logout`;
 export const CLIENT_STATISTICS_BY_ROLE_URL = `${BASE_URL}/clients/statistics/role`;
 export const CLIENT_STATISTICS_BY_CYCLE_URL = `${BASE_URL}/clients/statistics/cycle`;
+export const FACTURE_STATISTICS_URL = `${BASE_URL}/factures/statistics`;
